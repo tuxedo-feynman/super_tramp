@@ -46,6 +46,9 @@ map <leader>n :bn<cr>
 map <leader>p :bp<cr>
 map <leader>d :bd<cr> 
 
+" Nerdtree customization
+nmap <C-O> :NERDTreeToggle<cr>
+
 "color schemes
 if has('gui_running')
   set background=dark
