@@ -23,7 +23,6 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kien/ctrlp.vim'
-Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'NLKNguyen/papercolor-theme'
@@ -41,12 +40,7 @@ set clipboard=unnamed
 
 highlight Cursor guibg=#626262
 
-set splitbelow
-
-" Navigate buffers
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr> 
+set splitright
 
 " Nerdtree customization
 nmap <C-O> :NERDTreeToggle<cr>
@@ -61,11 +55,12 @@ colorscheme PaperColor
 map gn :bn<cr>
 map gp :bp<cr>
 map gd :bd<cr>
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+
+" Navigate windows
+map <C-J> <C-W><C-J>
+map <C-K> <C-W><C-K>
+map <C-L> <C-W><C-L>
+map <C-H> <C-W><C-H>
 
 " map jk kj to esc
 imap jk <Esc>
@@ -83,25 +78,6 @@ nnoremap <space> za
 
 " See docstrings for folded code
 let g:SimpylFold_docstring_preview=1
-
-"Pipenv with YCM
-" Point YCM to the Pipenv created virtualenv, if possible
-" At first, get the output of 'pipenv --venv' command.
-let pipenv_venv_path = system('pipenv --venv')
-" The above system() call produces a non zero exit code whenever
-" a proper virtual environment has not been found.
-" So, second, we only point YCM to the virtual environment when
-" the call to 'pipenv --venv' was successful.
-" Remember, that 'pipenv --venv' only points to the root directory
-" of the virtual environment, so we have to append a full path to
-" the python executable.
-if shell_error == 0
-  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-  let g:ycm_python_binary_path = venv_path . '/bin/python'
-else
-  let g:ycm_python_binary_path = 'python'
-endif
-
 
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
