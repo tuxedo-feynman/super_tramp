@@ -1,11 +1,17 @@
 #!/usr/bin/bash
 
 
-###################################
-# FASTAI-DEV SCRIPT		  #
-# Setup a development environment #
-# for fastai projects on iPad	  #	
-###################################
+#########################################################
+# FASTAI-DEV SCRIPT		  			#
+# Setup a development environment 			#
+# for fastai projects on iPad	  			#
+#########################################################
+# First you need to clone this repo on the new server.	#
+# generate a new ssh key pair     			#
+# ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"	#
+# copy the public key, and add it to github.		#
+# then git clone the repo on the new server 		#
+#########################################################
 
 SUPPORTED_OS_NAME="Ubuntu"
 SUPPORTED_OS_VERSION="impish"
