@@ -23,10 +23,18 @@ if [[ $IS_SUPPORTED_OS == false ]]; then
 	echo "ERROR: fastai-dev script only supports Ubuntu Impish"
 	exit 1
 fi
+if [ -z $USERNAME ]; then
+	echo $USERNAME
+	echo "ERROR: must set a USERNAME variable"
+	exit 1
+fi
 
 ### SETUP NEW SYSTEM ###
-adduser $USERNAME
-adduser $USERNAME sudo
+#adduser $USERNAME
+#adduser $USERNAME sudo
+#ufw enable
+#ufw allow ssh
+#ufw allow 60000:61000/udp
 
 ### SETUP SPEECH DEPENDENCIES
 apt-get update
@@ -36,17 +44,21 @@ apt-get -y install graphviz \
    curl \
    htop \
    ffmpeg \
-   docker.io \
    neovim \
-   python3-pip
+   python3-pip \
+   python-sofware-properties \
+   tmux
 
+apt-get repository ppa:keithw/mosh
+apt-get update
+apt-get install mosh
 
-sudo systemctl enable --now docker
-
-apt-get -y install libsndfile1
+apt autoremove
+#apt-get -y install libsndfile1
 
 cd /home/$USERNAME
 
-sudo -u $USERNAME git clone https://github.com/tuxedo-feynman/smellslikesingularity
-
-pip install fastai
+#sudo -u $USERNAME cd ~/ && git clone https://github.com/tuxedo-feynman/smellslikesingularity
+#
+#cp /root/super_tramp/tmux/.tmux.conf ~/ && chown $USERNAME ~/.tmux.conf
+#pip install fastai
