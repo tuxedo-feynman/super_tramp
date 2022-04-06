@@ -53,7 +53,9 @@ apt-get -y install graphviz \
    neovim \
    python3-pip \
    python-sofware-properties \
-   tmux
+   tmux \
+   autotools-dev \
+   automake
 
 apt-get repository ppa:keithw/mosh
 apt-get update
@@ -65,6 +67,8 @@ apt autoremove
 cd /home/$USERNAME
 
 #sudo -u $USERNAME cd ~/ && git clone https://github.com/tuxedo-feynman/smellslikesingularity
-#
+#make this a link instead
 #cp /root/super_tramp/tmux/.tmux.conf ~/ && chown $USERNAME ~/.tmux.conf
 #pip install fastai
+
+git clone https://github.com/ggreer/the_silver_searcher ag && cd ag && ./build.sh && make install
