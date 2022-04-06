@@ -52,23 +52,35 @@ apt-get -y install graphviz \
    ffmpeg \
    neovim \
    python3-pip \
-   python-sofware-properties \
+   sofware-properties-common \
    tmux \
-   autotools-dev \
-   automake
+   silversearcher-ag
 
 apt-get repository ppa:keithw/mosh
 apt-get update
 apt-get install mosh
 
-apt autoremove
-#apt-get -y install libsndfile1
 
-cd /home/$USERNAME
+# VIM
+VIM_PLUG_FILE_PATH=".local/share/nvim/site/autoload"
+echo "${VIM_PLUG_FILE_PATH}/plug.vim"
+mkdir -p "/home/${USERNAME}/${VIM_PLUG_FILE_PATH}" && cp "${VIM_PLUG_FILE_PATH}/plug.vim" "/home/${USERNAME}/${VIM_PLUG_FILE_PATH}" && chown -R $USERNAME "/home/${USERNAME}/.local"
+mkdir -p ~/$VIM_PLUG_FILE_PATH && cp $VIM_PLUG_FILE_PATH/plug.vim ~/$VIM_PLUG_FILE_PATH/
 
-#sudo -u $USERNAME cd ~/ && git clone https://github.com/tuxedo-feynman/smellslikesingularity
+VIM_CONFIG_DIR=".config/nvim"
+mkdir -p "/home/${USERNAME}/${VIM_CONFIG_DIR}" && cp "${VIM_CONFIG_DIR}/init.vim" "/home/${USERNAME}/${VIM_CONFIG_DIR}" && chown -R $USERNAME "/home/${USERNAME}/.config"
+mkdir -p ~/$VIM_CONFIG_DIR && cp $VIM_CONFIG_DIR/init.vim ~/$VIM_CONFIG_DIR
+
+nvim 'PlugInstall --sync' +qa
+sudo su $USERNAME nvim 'PlugInstall --sync' +qa
+
 #make this a link instead
-#cp /root/super_tramp/tmux/.tmux.conf ~/ && chown $USERNAME ~/.tmux.conf
-#pip install fastai
+cp tmux/.tmux.conf /home/$USERNAME && chown $USERNAME /home/$USERNAME/.tmux.conf
+cp tmux/.tmux.conf ~/
 
-git clone https://github.com/ggreer/the_silver_searcher ag && cd ag && ./build.sh && make install
+# my app stuff
+#apt-get -y install libsndfile1
+#pip install fastai
+#sudo -u $USERNAME cd ~/ && git clone https://github.com/tuxedo-feynman/smellslikesingularity
+
+apt autoremove
