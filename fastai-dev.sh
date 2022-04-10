@@ -50,11 +50,11 @@ apt-get -y install graphviz \
    curl \
    htop \
    ffmpeg \
-   neovim \
    python3-pip \
-   sofware-properties-common \
    tmux \
-   silversearcher-ag
+   silversearcher-ag \
+   nodejs \
+   npm
 
 apt-get repository ppa:keithw/mosh
 apt-get update
@@ -62,6 +62,18 @@ apt-get install mosh
 
 
 # VIM
+
+# install 0.6.1 
+wget https://github.com/neovim/neovim/releases/download/v0.6.1/nvim.appimage
+mv nvim.appimage /usr/local/bin/
+chmod +x /usr/local/bin/nvim.appimage
+
+CUSTOM_NVIM_PATH=/usr/local/bin/nvim.appimage
+sudo update-alternatives --install /usr/bin/ex v "${CUSTOM_NVIM_PATH}" 110
+sudo update-alternatives --install /usr/bin/vi vi "${CUSTOM_NVIM_PATH}" 110
+sudo update-alternatives --install /usr/bin/vim vim "${CUSTOM_NVIM_PATH}" 110
+
+# configure
 VIM_PLUG_FILE_PATH=".local/share/nvim/site/autoload"
 echo "${VIM_PLUG_FILE_PATH}/plug.vim"
 mkdir -p "/home/${USERNAME}/${VIM_PLUG_FILE_PATH}" && cp "${VIM_PLUG_FILE_PATH}/plug.vim" "/home/${USERNAME}/${VIM_PLUG_FILE_PATH}" && chown -R $USERNAME "/home/${USERNAME}/.local"
@@ -71,9 +83,10 @@ VIM_CONFIG_DIR=".config/nvim"
 mkdir -p "/home/${USERNAME}/${VIM_CONFIG_DIR}" && cp "${VIM_CONFIG_DIR}/init.vim" "/home/${USERNAME}/${VIM_CONFIG_DIR}" && chown -R $USERNAME "/home/${USERNAME}/.config"
 mkdir -p ~/$VIM_CONFIG_DIR && cp $VIM_CONFIG_DIR/init.vim ~/$VIM_CONFIG_DIR
 
-nvim 'PlugInstall --sync' +qa
-sudo su $USERNAME nvim 'PlugInstall --sync' +qa
+vim 'PlugInstall --sync' +qa
+sudo su $USERNAME vim 'PlugInstall --sync' +qa
 
+echo "WE DIDN'T SeTUP COPILOT, RUN Copilot setup in VIM"
 #make this a link instead
 cp tmux/.tmux.conf /home/$USERNAME && chown $USERNAME /home/$USERNAME/.tmux.conf
 cp tmux/.tmux.conf ~/

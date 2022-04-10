@@ -6,6 +6,7 @@ call plug#begin()
 Plug 'preservim/nerdtree'
 Plug 'numkil/ag.nvim'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'github/copilot.vim'
 
 
 " Initialize plugin system
